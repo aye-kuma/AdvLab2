@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+l = 0.045
+a = 0.006
+p = 7750
+E = 2e11
+f = ( (1.875**2) / (2*np.pi*l**2) ) * np.sqrt( (a**2*E) / (12*p) )
+
+path = "/Users/theo/Desktop/ALL0003/F0003MTH.CSV"
+data = data = np.genfromtxt(path, delimiter=',', usecols=(3,4),names=['freq','level'])
+
+freqs = data['freq']
+levels = data['level']
+
+plt.plot(freqs,levels, color="lightblue", marker='o', mec='steelblue', mfc='steelblue', ms='3')
+plt.xlabel('Freq [Hz]')
+plt.ylabel('Level dB')
+plt.title('Spectrum of Tuning Fork')
+plt.xlim(2200,2500)
+plt.grid()
+plt.plot(freqs[473],levels[473], 'o', color='tab:red')
+plt.annotate("2333Hz",
+                xy=(freqs[473],levels[473]),
+                textcoords="offset points",
+                xytext=(40,-20),
+                ha='left',
+                va='bottom',
+                bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.2),
+                arrowprops=dict(arrowstyle = '-|>', connectionstyle='arc3, rad=0'))
+plt.show()
